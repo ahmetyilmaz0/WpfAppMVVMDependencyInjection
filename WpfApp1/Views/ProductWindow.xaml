@@ -1,0 +1,37 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfApp1.Views"
+        xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid" x:Class="WpfApp1.Views.ProductWindow"
+        xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+        mc:Ignorable="d"
+        Title="ProductWindow"     
+        Width="800"
+        Height="450"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <dxg:GridControl Name="grid"
+                         AutoGenerateColumns="AddNew"
+                         ItemsSource="{Binding Products}" 
+                         SelectionMode="Row" 
+                         SelectedItems="{Binding Selections}">
+            <dxg:GridControl.View>
+                <dxg:TableView x:Name="view">
+                    <dxg:TableView.RowCellMenuCustomizations>
+                        <dxb:BarButtonItem Name="saveItemsAsCSV" 
+                                           Content="Save As CSV" 
+                                           Command="{Binding Path=(dxg:GridPopupMenu.GridMenuInfo).View.DataContext.SaveAsCSV, 
+                            RelativeSource={RelativeSource Self}}" />
+                        <dxb:BarButtonItem Name="saveItemsAsTXT" 
+                                           Content="Save As Text" 
+                                            Command="{Binding Path=(dxg:GridPopupMenu.GridMenuInfo).View.DataContext.SaveAsTXT, 
+                            RelativeSource={RelativeSource Self}}" />
+                    </dxg:TableView.RowCellMenuCustomizations>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </Grid>
+</Window>
